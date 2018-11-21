@@ -14,7 +14,7 @@ export class Evento {
     errors = []
 
 
-    static fromJson(usuarioJson) {
+    static fromJson(eventoJson) {
         const result = new Evento
         for (let key in eventoJson) {
             result[key] = eventoJson[key]
