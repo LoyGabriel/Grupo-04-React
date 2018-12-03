@@ -7,7 +7,7 @@ export class EventoService {
   }
 
   allInstances() {
-    return fetch(REST_SERVER_URL + "/eventos")
+    return fetch(REST_SERVER_URL + "/eventosDeInteres")
   }
 
   async geteventoById(id) {
