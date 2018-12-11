@@ -22,7 +22,7 @@ export class Usuario{
     cantidadActividad
 
     static fromJson(usuarioJson) {
-        const result= new Usuario 
+        const result= new Usuario()
         for (let key in usuarioJson) {
             result[key] = usuarioJson[key]
         }

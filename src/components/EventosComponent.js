@@ -3,16 +3,10 @@ import { EventoService } from '../services/evento.service'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import { Tooltip } from '@material-ui/core'
-import { withRouter } from 'react-router-dom'
 import { Evento } from '../domain/evento.domain';
+import  MenuComponent from './menu'
 
 class EventosComponent extends Component {
 
@@ -34,19 +28,27 @@ class EventosComponent extends Component {
     }
   }
 
+  errorHandler(e) {
+    console.log("ERROR ", e)
+  }
+
   render() {
     return (
-      <Paper>
-        <h1>Eventos OS</h1>
-        <Table>
-          <TableBody id="resultados">
-          </TableBody>
-          {this.state.eventos.map((evento) => <EventoRow evento={evento} id={"Row" + evento.id} key={evento.id} history={this.props.history} eventoService={this.eventoService} />)}
-        </Table>
-      </Paper>
+      <div>
+        <MenuComponent/>
+        <Paper>
+          <Table>
+            <TableBody id="resultados">
+              {this.state.eventos.map((evento) => <EventoRow evento={evento} id={"Row" + evento.id} key={evento.id} history={this.props.history} eventoService={this.eventoService} />)}
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
     )
   }
 }
+
+
 
 export class EventoRow extends Component {
   componentWillMount() {
@@ -55,19 +57,24 @@ export class EventoRow extends Component {
     })
   }
 
+
+  getFullDate(date) {
+    return date.dayOfMonth + "/" + date.monthValue + "/" + date.year
+  }
+
   render() {
     const evento = this.state.evento
-    console.log(evento);
     return (
-      <TableRow key={evento.id} id={"TableRow" + evento.id}>
-        <TableCell component="th" scope="row">
+      <TableRow key={evento.id} id={"TableRow" + evento.id} onClick={() => this.props.history.push('/comprarEntradas/' + evento.id)}>
+        <TableCell>
           {evento.nombre}
         </TableCell>
-        <TableCell>{evento.fechaDeInicioDelEvento.json}</TableCell>
+        <TableCell>{this.getFullDate(evento.fechaDeInicioDelEvento)}</TableCell>
         <TableCell>{evento.locacion.nombreDeLaLocacion ? evento.locacion.nombreDeLaLocacion : ''}</TableCell>
       </TableRow>
     )
   }
 }
+
 
 export default EventosComponent;

@@ -9,9 +9,17 @@ export class Locacion {
     provincia
 
     cearNuevaLocacion(id, nombreDeLaLocacion){
-        var locacion = new Locacion
+        var locacion = new Locacion()
         locacion.id = id
         locacion.nombreDeLaLocacion = nombreDeLaLocacion
         return locacion
+    }
+
+    static fromJson(locacionJson){
+        const result = new Locacion()
+        for (let key in locacionJson) {
+            result[key] = locacionJson[key]
+        }
+        return result
     }
 }

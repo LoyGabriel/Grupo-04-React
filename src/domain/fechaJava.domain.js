@@ -11,18 +11,19 @@ export class FechaJava {
     chronology
 
     static fromJson(fechaJson) {
-        var result = new FechaJava
+        var result = new FechaJava()
         for (let key in fechaJson) {
             result[key] = fechaJson[key]
         }
-        return this.convertToDate(result)
+        return result
     }
 
-    static convertToDate(result) {
+
+    /*static convertToDate(result) {
         var date = new Date()
         date.setFullYear(result.year, result.monthValue, result.dayOfMonth)
         date.setHours(result.hour, result.minute, 0)
         return date
-    }
+    }*/
 
 }

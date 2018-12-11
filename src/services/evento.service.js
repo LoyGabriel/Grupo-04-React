@@ -10,8 +10,12 @@ export class EventoService {
     return fetch(REST_SERVER_URL + "/eventosDeInteres")
   }
 
-  async geteventoById(id) {
-    const res = await fetch(REST_SERVER_URL + "/eventos/" + id)
+  allEntradasInstances(){
+    return fetch(REST_SERVER_URL + "/todasLasEntradas")
+  }
+
+  async getEventoById(id) { 
+    const res = await fetch(REST_SERVER_URL + "/getEventoById/" + id)
     const eventoJson = await res.json()
     return this.eventoAsJson(eventoJson)
   }
@@ -23,4 +27,9 @@ export class EventoService {
     })
   }
 
+  comprarEntrada(evento, cantidad){
+    return fetch(REST_SERVER_URL + "/comprarEntrada/" + evento.id +"/"+ cantidad)
+  }
+
+ 
 }
