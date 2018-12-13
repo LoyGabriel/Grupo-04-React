@@ -37,7 +37,7 @@ export default class ComprarEntradaComponent extends Component {
   }
 
   generarError(errorMessage) {
-    console.log(errorMessage)
+    console.log("MENSAJE DE ERROR", errorMessage)
     this.setState({
       errorMessage: errorMessage.toString()
     })
@@ -55,8 +55,10 @@ export default class ComprarEntradaComponent extends Component {
 
   async comprarEntrada() {
     try {
+      if(this.state.cantidad>0){
         await eventoService.comprarEntrada(this.state.evento, this.state.cantidad)
         this.volver()
+      }
     } catch (e) {
         this.generarError(e)
     }
